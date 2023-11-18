@@ -1,24 +1,31 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3000/api/login', {
+            const response = await fetch('http://localhost:304545/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body:JSON.stringify({ email, password }),
             });
-            if (response.ok) {
+
+            if (response.ok) {const data = await response.json();
+                localStorage.setItem('token', data.token);
                 setMessage("Login successful");
+                setTimeout(() => navigate("/index"), 2000)
+            } else {
+                const data = await response.json();
+                setMessage(data.message || "Login unsuccessful");
             }
-            const data = await response.json();
         }
         catch (error) {
             console.error('Error:', error);

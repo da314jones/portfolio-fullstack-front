@@ -5,11 +5,14 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
+import Index from "./pages/Index";
 import Registration from "./pages/Registration";
+
 
 function App() {
   const [count, setCount] = useState(0);
 
+  
   return (
     <>
       <div>
@@ -37,6 +40,7 @@ function App() {
           <Route exact path="/" element={<Welcome />} />
           <Route  path="/login" element={<Login />} />
           <Route  path="/register" element={<Registration />} />
+          <Route  path="/index" element={<Index />} />
         </Routes>
       </Router>
     </>
