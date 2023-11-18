@@ -6,15 +6,18 @@ export default function Registration() {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsProcessing(true)
     setMessage("");
 
     if (password !== repeatPassword) {
       console.error("Passwords do not match");
       setMessage("Passwords do not match.");
+      setIsProcessing(false);
       return;
     }
     try {
@@ -38,6 +41,9 @@ export default function Registration() {
     } catch (error) {
       console.error("Error", error);
       setMessage("An error occurred.");
+    }
+    finally {
+        setIsProcessing(false);
     }
   };
 
@@ -119,6 +125,7 @@ export default function Registration() {
         >
           Register new account
         </button>
+        {message && !isProcessing && <p className="text-red-500">{message}</p>}
       </form>
     </>
   );
