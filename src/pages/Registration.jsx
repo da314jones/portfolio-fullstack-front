@@ -48,7 +48,7 @@ if (!serviceBranch || !yearsOfService) {
         setMessage(data.message || "Login unsuccessful");
       }
     } catch (error) {
-      if (error.name === 'TypeError' && error.messsage === 'Failed to fetch') {
+      if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
         setMessage("cannot connect to the server. Please check your internet connection or try again later.")
       }
       console.error("Error", error);
