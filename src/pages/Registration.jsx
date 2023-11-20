@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 export default function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [serviceBranch, setServiceBranch] = useState("");
+  const [yearsOfService, setYearsOfService] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -20,13 +22,20 @@ export default function Registration() {
       setIsProcessing(false);
       return;
     }
+
+if (!serviceBranch || !yearsOfService) {
+  setMessage("Branch of service and years of service required.");
+  setIsProcessing(false);
+  return;
+}
+
     try {
       const response = await fetch("http://localhost:4545/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, serviceBranch, yearsOfService }),
       });
       if (response.ok) {
         setMessage("Registration successful");
@@ -39,6 +48,9 @@ export default function Registration() {
         setMessage(data.message || "Login unsuccessful");
       }
     } catch (error) {
+      if (error.name === 'TypeError' && error.messsage === 'Failed to fetch') {
+        setMessage("cannot connect to the server. Please check your internet connection or try again later.")
+      }
       console.error("Error", error);
       setMessage("An error occurred.");
     }
@@ -66,6 +78,32 @@ export default function Registration() {
             required
           />
         </div>
+        <div className="mb-6">
+  <label htmlFor="serviceBranch" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+    Service Branch
+  </label>
+  <input
+    onChange={(e) => setServiceBranch(e.target.value)}
+    type="text"
+    id="serviceBranch"
+    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+    placeholder="ARMY, NAVY, AIR FORCE, MARINES"
+    required
+  />
+</div>
+<div className="mb-6">
+  <label htmlFor="yearsOfService" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+    Years of Service
+  </label>
+  <input
+    onChange={(e) => setYearsOfService(e.target.value)}
+    type="number"
+    id="yearsOfService"
+    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+    placeholder="OO"
+    required
+  />
+</div>
         <div className="mb-6">
           <label
             htmlFor="password"

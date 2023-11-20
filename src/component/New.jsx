@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 
-export default function Edit() {
+export default function New() {
 
 
 
-useEffect(() => {
-  
-})
+    useEffect(() => {
 
+    })
+    
   return (
     <div>
       
