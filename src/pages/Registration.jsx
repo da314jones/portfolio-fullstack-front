@@ -61,6 +61,24 @@ if (!serviceBranch || !yearsOfService) {
 
   return (
     <>
+<a
+          href="/"
+          className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+        >
+          <img
+            className="registration-container-img"
+            src="public/vetlogo.png"
+            alt="logo"
+          />
+        </a>    <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                Already registered?{" "}
+                <a
+                  href="login"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Login
+                </a>
+              </p>
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
           <label
@@ -116,7 +134,9 @@ if (!serviceBranch || !yearsOfService) {
             type="password"
             id="password"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            placeholder="password"
             required
+
           />
         </div>
         <div className="mb-6">
@@ -131,7 +151,8 @@ if (!serviceBranch || !yearsOfService) {
             type="password"
             id="repeat-password"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-            required
+            placeholder="confirm password"required
+
           />
         </div>
         <div className="flex items-start mb-6">

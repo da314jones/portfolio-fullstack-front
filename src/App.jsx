@@ -1,46 +1,27 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
-import Index from "./pages/Index";
 import Registration from "./pages/Registration";
+import Entries from "./component/Entries";
+import NewJournalEntry from "./component/NewJournalEntry";
+import FourOFour from "./pages/FourOFour";
 
 
-function App() {
-  const [count, setCount] = useState(0);
 
-  
+function App() {  
+
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <Router>
+            <Router>
         <Routes>
           <Route exact path="/" element={<Welcome />} />
-          <Route  path="/login" element={<Login />} />
-          <Route  path="/register" element={<Registration />} />
-          <Route  path="/index" element={<Index />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/entries" element={<Entries />} />
+          <Route path="/entries/new" element={<NewJournalEntry />} />
+          <Route path="*" element={<FourOFour />} />
         </Routes>
       </Router>
     </>
