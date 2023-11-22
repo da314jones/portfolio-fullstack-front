@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Welcome.css"; // Ensure this path is correct for your project structure
 
 export default function Welcome() {
+  
   return (
     <div className="relative min-h-screen bg-white dark:bg-gray-900 overflow-hidden" style={{ height: '100vh' }}>
       {/* Header with Logo and Welcome Message */}

@@ -7,20 +7,19 @@ import Registration from "./pages/Registration";
 import Entries from "./component/Entries";
 import NewJournalEntry from "./component/NewJournalEntry";
 import FourOFour from "./pages/FourOFour";
+import Show from "./pages/Show";
 
-
-
-function App() {  
-
+function App() {
   return (
     <>
-            <Router>
+      <Router>
         <Routes>
           <Route exact path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/entries" element={<Entries />} />
           <Route path="/entries/new" element={<NewJournalEntry />} />
+          <Route path="/entries/:id" element={<Show />} />
           <Route path="*" element={<FourOFour />} />
         </Routes>
       </Router>
