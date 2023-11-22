@@ -15,6 +15,9 @@ export default function NewJournalEntry() {
         activityId: ""
     });
     const [activities, setActivities] = useState([]);
+	const [moods, setMoods] = useState([]);
+	const [isVeteranSpecific, setIsVeteranSpecific] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,7 +25,16 @@ export default function NewJournalEntry() {
             .then(response => response.json())
             .then(data => setActivities(data.allActivities))
             .catch(error => console.error("Error fetching activities:", error));
-    }, []);
+}, []);
+ 
+useEffect(() => {
+	fetch(`${API}/moods`)
+	  .then(response => response.json())
+	  .then(data => setMoods(data))
+	  .catch(error => console.error("Error fetching moods:", error));
+  }, []);
+  
+	
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,101 +63,95 @@ export default function NewJournalEntry() {
     };
 
 	const handleCancel = () => {
-		navigate("/entries");
+		navigate("/entries");;
+	}
+	const handleCheckboxChange = (e) => {
+		setIsVeteranSpecific(e.target.checked)
 	}
 
     return (
-        <div className="relative min-h-screen bg-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 bg-gray-500 bg-no-repeat bg-cover"
-             >
-            <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
-                <div className="grid gap-8 grid-cols-1">
-                    <div className="flex flex-col">
-                        <h2 className="font-semibold text-lg text-center">Journal Entry</h2>
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="mb-3">
-                                <label className="font-semibold text-gray-600 py-2">Date</label>
-                                <input
-                                    type="date"
-                                    name="date"
-                                    value={newEntry.date}
-                                    onChange={handleChange}
-                                    className="block w-full bg-grey-lighter text-grey-darker border rounded-lg h-10 px-4"
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label className="font-semibold text-gray-600 py-2">Mood Rating</label>
-                                <input
-                                    type="number"
-                                    name="mood"
-                                    value={newEntry.mood}
-                                    onChange={handleChange}
-                                    className="block w-full bg-grey-lighter text-grey-darker border rounded-lg h-10 px-4"
-                                    min="1"
-                                    max="5"
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label className="font-semibold text-gray-600 py-2">Mood Description</label>
-                                <textarea
-                                    name="description"
-                                    value={newEntry.description}
-                                    onChange={handleChange}
-                                    className="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block bg-grey-lighter text-grey-darker border rounded-lg py-4 px-4"
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label className="font-semibold text-gray-600 py-2">Service Related Notes</label>
-                                <textarea
-                                    name="serviceRelatedNotes"
-                                    value={newEntry.serviceRelatedNotes}
-                                    onChange={handleChange}
-                                    className="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block bg-grey-lighter text-grey-darker border rounded-lg py-4 px-4"
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label className="font-semibold text-gray-600 py-2">Custom Activity</label>
-                                <input
-                                    type="text"
-                                    name="customActivity"
-                                    value={newEntry.customActivity}
-                                    onChange={handleChange}
-                                    className="block w-full bg-grey-lighter text-grey-darker border rounded-lg h-10 px-4"
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <label className="font-semibold text-gray-600 py-2">Activity</label>
-                                <select
-                                    name="activityId"
-                                    value={newEntry.activityId}
-                                    onChange={handleChange}
-                                    className="block w-full bg-grey-lighter text-grey-darker border rounded-lg h-10 px-4"
-                                >
-                                    <option value="">Select an activity</option>
-                                    {activities.map(activity => (
-                                        <option key={activity.id} value={activity.id}>{activity.title}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className="mb-3">
-                                <label className="font-semibold text-gray-600 py-2">Activity Rating (1-5)</label>
-                                <input
-                                    type="number"
-                                    name="activityRating"
-                                    value={newEntry.activityRating}
-                                    onChange={handleChange}
-                                    className="block w-full bg-grey-lighter text-grey-darker border rounded-lg h-10 px-4"
-                                    min="1"
-                                    max="5"
-                                />
-                            </div>
-                            <div className="flex justify-end space-x-3">
-                                <button type="button" onClick={handleCancel} className="bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">Cancel</button>
-                                <button type="submit" className="bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500">Save</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
+		<div className="relative min-h-screen bg-black bg-cover bg-center py-12 px-4 sm:px-6 lg:px-8">
+			<div className="max-w-md mx-auto space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+				<div className="text-center">
+					<h2 className="font-semibold text-lg text-white mb-4">New Entry</h2>
+				</div>
+				<form onSubmit={handleSubmit} className="space-y-6">
+					<div className="flex justify-between items-center">
+						<input
+							type="date"
+							name="date"
+							value={newEntry.date}
+							onChange={handleChange}
+							className="form-input rounded-md"
+						/>
+						<input 
+							type="number" 
+							name="activityRating" 
+							value={newEntry.activityRating} 
+							onChange={handleChange} 
+							min="1" max="5" 
+							className="form-input rounded-md"
+						/>
+					</div>
+					<div>
+						<label className="text-gray-600">Mood</label>
+						<select 
+							name="moodAdjective" 
+							onChange={handleChange} 
+							value={newEntry.moodAdjective} 
+							className="form-select w-full rounded-md"
+						>
+							{moods.map(mood => (
+								<option key={mood.id} value={mood.adjective}>{mood.adjective}</option>
+							))}
+						</select>
+					</div>
+					<div>
+						<label className="text-gray-600">Journal Entry</label>
+						<textarea
+							name="description"
+							value={newEntry.description}
+							onChange={handleChange}
+							className="form-textarea w-full rounded-md h-28"
+						/>
+					</div>
+					<div>
+						
+						<label className="text-gray-600">Service Related Notes</label>
+						<input
+          type="checkbox"
+          checked={isVeteranSpecific}
+          onChange={handleCheckboxChange}
+        />
+						<textarea
+							name="serviceRelatedNotes"
+							value={newEntry.serviceRelatedNotes}
+							onChange={handleChange}
+							className="form-textarea w-full rounded-md h-28"
+						/>
+					</div>
+					<div>
+						<label className="text-gray-600">Activities Done</label>
+						<select
+							name="activityId"
+							value={newEntry.activityId}
+							onChange={handleChange}
+							className="form-select w-full rounded-md"
+						>
+							<option value="">Select an activity</option>
+							{activities.map(activity => (
+								<option key={activity.id} value={activity.id}>{activity.title}</option>
+							))}
+						</select>
+					</div>
+					<div className="flex justify-between">
+			<button type="button" onClick={handleCancel} className="text-sm shadow-sm font-medium tracking-wider border rounded-full hover:shadow-lg">Back</button>
+			<button type="submit" className="text-sm shadow-sm font-medium tracking-wider text-black rounded-full hover:shadow-lg">Submit</button>
+			<button type="button" onClick={handleCancel} className="text-sm shadow-sm font-medium tracking-wider text-black rounded-full hover:shadow-lg">Cancel</button>
+		  </div>
+				</form>
+			</div>
+		</div>
+	)
+};
+
