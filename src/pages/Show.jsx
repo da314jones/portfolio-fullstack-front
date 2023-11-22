@@ -5,7 +5,7 @@ const API = import.meta.env.VITE_API_URL
 
 
 export default function Show() {
-  const { id } = useParams();
+  let { id } = useParams();
   const [entry, setEntry] = useState();
 
   
