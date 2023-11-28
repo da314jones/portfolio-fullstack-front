@@ -1,12 +1,16 @@
-import React from 'react'
+import React from 'react';
+import "./Entry.css";
 
 export default function Entry({ entry }) {
 
+  const date = new Date(entry.date);
+  const formattedDate = date.toLocaleDateString();
+
   return (
-    <div>
-      <h1>{entry.date}</h1>
-      <p>{entry.mood}</p>
-      <p>{entry.description}</p>
-    </div>
-  )
+    <tr className='entry-container'>
+      <td className="leading-8 text-center" >{formattedDate}</td>
+      <td className='text-left'>{entry.description}</td>
+      <td className='text-center'>{entry.adjective_before}</td>
+    </tr>
+  );
 }

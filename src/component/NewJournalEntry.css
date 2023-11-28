@@ -1,0 +1,118 @@
+@font-face {
+  font-family: Grand Cru S;
+  font-style: normal;font-weight: normal;
+  src: local("src/GrandCruFonts"),
+}
+
+body {
+  background-color: black;
+}
+
+.new-entry-title {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20%;
+  font-family: 'GrandCruS', sans-serif;
+  font-size: 32px;
+  color: white
+  ;
+  src: src/GrandCruFonts;
+}
+
+label,
+input,
+textarea,
+select {
+  font-size: 20px; 
+  height: 60px; 
+  color: white;
+}
+
+select {
+  color: black;
+}
+
+select {
+  height: 45px;
+  width: 100%; 
+  color: black;
+}
+
+select#mood_before {
+  color: black;
+}
+
+.profileImg {
+  width: 100%; 
+  /* max-width: 50%; */
+  padding-bottom: 15px; 
+}
+
+.logoImg {
+  width: 80%; 
+  padding-left: 20%;
+}
+
+.new-entry-profile-logo-img {
+  width: 30%; 
+  max-width: 30%;
+}
+
+.new-entry-container-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-entry-formTop {
+  display: flex;
+  justify-content: space-evenly;
+  width: 60%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[name="rating_before"],
+input[name="date"]  {
+  /* height: 97.5%;  */
+  width: 155px;
+  background-color: black;
+  padding-left: 10%;
+}
+
+.date,
+.rating {
+  padding-left: 40px;
+}
+
+.new-entry-formMid {
+  display: flex;
+  justify-content: flex-end;
+  height: 10px;
+  margin-top: -105px; 
+}
+
+.form-bottom {
+  padding-top: 150px; 
+  flex-direction: column;
+}
+
+.new-entry-lower-half {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 20px;
+}
+
+input#is_service_related {
+  padding-top: 0px;
+height: 20px;
+}
+
+.back,
+.submit,
+.cancel {
+  color: white;
+}

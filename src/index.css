@@ -2,3 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+    font-family: "GranCru";
+    src: local("GrandCru"),
+     url("src/GrandCruFonts/grand-cru-font/GrandCru-LightS.otf") format("truetype");
+    font-weight: bold;
+   }
+   
+   .font-face-gm {
+    font-family: "GrandCru";
+   }
+   

@@ -1,6 +1,5 @@
 #root {
   font-family: 'GrandCru', sans-serif;
-
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -8,4 +7,16 @@
 }
 
 body {
+  font-family: 'GrandCru', sans-serif;
 }
+
+@font-face {
+  font-family: "GrandCru";
+  src: local("GrandCru"),
+   url("src/GrandCruFonts/grand-cru-font/GrandCru-LightS.otf") format("truetype");
+  font-weight: bold;
+ }
+ 
+ .font-face-gm {
+  font-family: "GrandCru";
+ }

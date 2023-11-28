@@ -1,107 +1,90 @@
-import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import "./EntryDetails.css"
-const API = import.meta.env.VITE_API_URL
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./EntryDetails.css";
+const API = import.meta.env.VITE_API_URL;
 
 export default function EntryDetails({ entry }) {
   const navigate = useNavigate();
 
-const handleDelete = () => {
-  const httpOptions = { method: "DELETE" };
-  fetch(`${API}/entries/${entries.id}`, httpOptions)
-  .then(() => navigate("/entries"))
-  .catch((error) => console.log(error));
-};
+  const handleDelete = () => {
+    const httpOptions = { method: "DELETE" };
+    fetch(`${API}/entries/${entries.id}`, httpOptions)
+      .then(() => navigate("/entries"))
+      .catch((error) => console.log(error));
+  };
+
+  const date = new Date(entry.date);
+  const formattedDate = date.toLocaleDateString();
 
   return (
-    
-      <div className="relative min-h-screen bg-white dark:bg-gray-900 overflow-hidden" style={{ height: '100vh' }}>
-      {/* Header with Logo and Welcome Message */}
-      <img className='show-container-profileImg' src="/Call-to-Action Button (19).png" alt="" />
-      <header className="text-center pt-4 top-0 left-0 right-0 bg-transparent z-10">
-        <h1 className="text-4xl font-bold text-white mb-4" style={{ fontFamily: 'GrandCru'}}>Journal Entry</h1>
-        
-        <a href="/" className="inline-block">
+    <div class="journal-container">
+      <div className="journal-container-top">
+        <div class="journal-container-profileImg">
           <img
-            className="w-20 h-auto" // Adjust size as needed
-            src="/vetlogo.png" // Replace with the correct path to your logo image
-            alt="Mindful March Logo"
+            className="show-container-profileImg"
+            src="/profileImg.jpg"
+            alt=""
           />
-        </a>
-      </header>
-
-
-<p>
-{entry.date}
-</p>
-
-<p>
-{entry.mood}
-  </p>  
-<p>
-   {entry.description}
-
-</p>
-<p>
-
-{entry.service_related_notes}
-</p>
-<p>
-
-{entry.custom_activity}
-</p>
-<p>
-
-{entry.activity_rating}
-</p>
-
-<p>
-
-{entry.activity_id}
-</p>
-
-
-
-{/* <p>
-
-{activities.id}
-</p>
-<p>
-
-{activities.title}
-</p>
-<p>
-
-{activities.description}
-</p>
-<p>
-
-{activities.mood_rating}
-</p>
-
-<p>
-
-{activities.is_veteran_specific}
-</p>
-
-
-
-<p>
-
-{mood.adjective}
-</p>
-<p>
-{mood.id}
-
-</p> */}
-
-
-      {/* <Edit /> */}
-      <button>Delete</button>
-      <button>back</button>
+        </div>
+        <div className="journal-container-topRight">
+          <div className="journal-container-title-logo">
+            <div class="journal-container-date">
+              <p>Date: {formattedDate}</p>
+            </div>
+            <div class="journal-container-title">
+              <h1
+                className="text-4xl font-bold text-white mb-4"
+                style={{ fontFamily: "GrandCru" }}
+              >
+                Journal Entry
+              </h1>
+            </div>
+          </div>
+          <div class="journal-container-logo">
+            <img
+              className="w-20 h-auto"
+              src="/vetLogo.png"
+              alt="Mindful March Logo"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="journal-container-rating">
+        <p>Rating Before: {entry.rating_before}</p>
+      </div>
+      <div class="journal-container-mood">
+        <p>Mood: {entry.adjective_before}</p>
+      </div>
+      <div class="journal-container-entry">
+        <p>Description: {entry.description}</p>
+      </div>
+      <div class="journal-container-service-related">
+        <p>Is Service Related: {entry.is_service_related ? "Yes" : "No"}</p>
+        {entry.is_service_related && (
+          <p>Service Related Notes: {entry.service_related_notes}</p>
+        )}
+      </div>
+      <div class="journal-container-activity_done">
+        <p>Activity: {entry.activity}</p>
+      </div>
+      <div class="journal-container-custom-activity">
+        <p>Custom Activity: {entry.custom_activity}</p>
+      </div>
+      <div class="journal-container-custom-activity">
+        <p>Rating After: {entry.rating_after}</p>
+      </div>
+      <div class="journal-container-custom-activity">
+        <p>Mood After: {entry.adjective_after}</p>
+      </div>
+      <div class="journal-container-back">
+        <button>back</button>
+      </div>
+      <div class="journal-container-edit">
+        <button>edit</button>
+      </div>
+      <div class="journal-container-delete">
+        <button onClick={handleDelete}>Delete</button>
+      </div>
     </div>
-  )
+  );
 }
-
-
-
