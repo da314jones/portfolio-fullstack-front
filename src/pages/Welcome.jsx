@@ -19,7 +19,7 @@ export default function Welcome() {
 
       <div className="absolute inset-x-0 bottom-0">
         <img
-          className="w-full object-cover object-bottom"
+          className="soldado w-full object-cover object-bottom"
           src="/Untitled (14).png" 
           alt="Soldado"
           style={{ 
