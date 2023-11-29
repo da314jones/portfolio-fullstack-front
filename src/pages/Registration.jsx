@@ -42,7 +42,7 @@ if (!serviceBranch || !yearsOfService) {
         setEmail("");
         setPassword("");
         setRepeatPassword("");
-        setTimeout(() => navigate("/index"), 2000);
+        setTimeout(() => navigate("/entries"), 2000);
       } else {
         const data = await response.json();
         setMessage(data.message || "Login unsuccessful");

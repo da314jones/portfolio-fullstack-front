@@ -9,11 +9,13 @@ import Show from "./pages/Show";
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Edit from "./pages/Edit";
+import Navbar from "./component/Navbar";
 
 function App() {
   return (
     <>
       <Router>
+        <Navbar />
         <Routes>
           <Route exact path="/" element={<Welcome />} />
           <Route path="/register" element={<Registration />} />

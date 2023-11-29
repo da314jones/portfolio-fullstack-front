@@ -27,7 +27,7 @@ export default function Login() {
         localStorage.setItem("token", data.token);
         setLoginSuccess(true);
         setMessage("Login successful");
-        setTimeout(() => navigate("/index"), 2000);
+        setTimeout(() => navigate("/entries"), 2000);
       } else {
         const data = await response.json();
         setMessage(data.message || "Login unsuccessful");
