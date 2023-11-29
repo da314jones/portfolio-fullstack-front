@@ -38,10 +38,8 @@ export default function NewJournalEntry() {
         "Content-Type": "application/json",
       },
     })
-      .then(() => {
-        navigate(`/entries`);
-      })
-      .catch((error) => console.error("catch, error"));
+      .then(() => navigate(`/entries`))
+      .catch((error) => console.error("Error adding entry:", error));
   };
 
   const handleChange = (e) => {
@@ -52,26 +50,8 @@ export default function NewJournalEntry() {
     }));
   };
 
-  const handleTopFormSubmit = (e) => {
-    e.preventDefault;
-    console.log("Top form submitted.")
-  }
-
-  const handleMidFormSubmit = (e) => {
-    e.preventDefault;
-    console.log("Mid form submitted.")
-  }
-
-  const handleBottomFormSubmit = (e) => {
-    e.preventDefault;
-    console.log("Bottom form submitted.")
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleTopFormSubmit();
-    handleMidFormSubmit();
-    handleBottomFormSubmit();
     console.log("Form submitted:", newEntry);
     addNewEntry();
   };
@@ -89,10 +69,10 @@ export default function NewJournalEntry() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <label className="rating col-span-2 lg:col-span-1">
+          <label className="rating  col-span-2 lg:col-span-1">
             Rating:
             <input
-              type="number"
+              type="range"
               id="rating_before"
               name="rating_before"
               value={newEntry.rating_before}
@@ -136,7 +116,7 @@ export default function NewJournalEntry() {
 
       <div className="formBottom">
         <form className="form-bottom" onSubmit={handleSubmit}>
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="description">Journal Entry</label>
           <textarea
             id="description"
             name="description"
@@ -144,7 +124,7 @@ export default function NewJournalEntry() {
             onChange={handleChange}
           />
 
-          <label htmlFor="is_service_related">Is Service Related:</label>
+          <label htmlFor="is_service_related"> Service Related</label>
           <input
             type="checkbox"
             id="is_service_related"
@@ -166,7 +146,7 @@ export default function NewJournalEntry() {
               />
             </>
           )}
-          <label htmlFor="activity">Activities Done</label>
+          <label htmlFor="activity">Completed Activity</label>
           <select
             id="activity"
             name="activity"
@@ -180,7 +160,7 @@ export default function NewJournalEntry() {
             ))}
           </select>
 
-          <label htmlFor="custom_activity">Custom Activity:</label>
+          <label htmlFor="custom_activity">Custom Activity</label>
           <input
             type="text"
             id="custom_activity"
@@ -189,32 +169,8 @@ export default function NewJournalEntry() {
             onChange={handleChange}
           />
 
-          <label htmlFor="rating_after">Rating</label>
-          <input
-            type="number"
-            id="rating_after"
-            name="rating_after"
-            value={newEntry.rating_after}
-            onChange={handleChange}
-          />
-
-          <label htmlFor="mood_after">After Activity</label>
-          <select
-            id="mood_after"
-            name="adjective_after"
-            value={newEntry.adjective_after}
-            onChange={handleChange}
-          >
-            {moods.map((mood, index) => (
-              <option key={index} value={mood}>
-                {mood}
-              </option>
-            ))}
-          </select>
-        </form>
-      </div>
-
-      <div className="new-entry-lower-half">
+          
+      <div className="new-entry-lower-half pt-8">
         <div className="back">
         <button className="bg-slate-50 hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full">back</button>{' '}
         </div>
@@ -225,6 +181,9 @@ export default function NewJournalEntry() {
           <button type="submit">cancel</button>
         </div>
       </div>
+        </form>
+      </div>
+
     </div>
   );
 }

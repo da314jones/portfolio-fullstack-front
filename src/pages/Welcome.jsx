@@ -11,7 +11,7 @@ export default function Welcome() {
         <a href="/" className="inline-block">
           <img
             className="w-60 h-auto" 
-            src="/vetlogo.png" 
+            src="/vetLogo.png" 
             alt="Mindful March Logo"
           />
         </a>

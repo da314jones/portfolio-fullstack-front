@@ -1,3 +1,53 @@
-.edit-entry-form-profile {
-    width: 100px;
+@font-face {
+    font-family: Grand Cru S;
+    font-style: normal;font-weight: normal;
+    src: local("src/GrandCruFonts"),
+  }
+
+  body {
+           font-family: 'GrandCru', sans-serif;
+  }
+  
+
+.edit-entry-container-profile {
+    width: 75%;
+}
+
+.edit-entry-container-title {
+    font-family: 'GrandCruS', sans-serif;
+}
+
+.edit-entry-container {
+font-size: 20px;
+font-family: 'GrandCruS', sans-serif;
+
+}
+
+.edit-entry-container-top-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.edit-entry-container-logo {
+    padding-top: 10px;
+}
+
+label {
+    font-size: 22px;
+}
+
+.edit-entry-container-topRight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-entry-logoImg {
+    width: 30%;
+}
+
+.edit-container-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 30px;
 }

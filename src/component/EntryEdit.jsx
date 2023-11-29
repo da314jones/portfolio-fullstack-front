@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./EntryEdit.css"
+import { getActivityData, getMoodData } from "../../utilities/dropDownItems";
+import "./EntryEdit.css";
 const API = import.meta.env.VITE_API_URL;
 
 export default function EntryEdit() {
@@ -10,15 +11,38 @@ export default function EntryEdit() {
   const [moods, setMoods] = useState([]);
   const [activities, setActivities] = useState([]);
   const [entry, setEntry] = useState({
-    mood: "",
-    rating: 0,
-    text: "",
-    serviceRelatedNotes: "",
-    activityDone: "",
+    rating_before: 1,
+    adjective_before: "",
+    description: "",
+    is_service_related: false,
+    service_related_notes: "",
+    activity: "",
+    custom_activity: "",
+    adjective_after: "",
+    rating_after: 1,
   });
 
   useEffect(() => {
-    // Fetch entry
+    const activitiesList = getActivityData();
+    const moodsList = getMoodData();
+    setActivities(activitiesList);
+    setMoods(moodsList);
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEntry({ ...entry, [name]: value });
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setEntry((prevEntry) => ({
+      ...prevEntry,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  useEffect(() => {
     fetch(`${API}/entries/${id}`)
       .then((response) => response.json())
       .then((responseJSON) => {
@@ -27,33 +51,7 @@ export default function EntryEdit() {
       .catch((error) => {
         console.error("Error fetching entry:", error);
       });
-    
-    // Fetch moods
-    fetch(`${API}/moods`)
-      .then((response) => response.json())
-      .then((responseJSON) => {
-        setMoods(responseJSON);
-      })
-      .catch((error) => {
-        console.error("Error fetching moods:", error);
-      });
-    
-    // Fetch activities
-    fetch(`${API}/activities`)
-      .then((response) => response.json())
-      .then((responseJSON) => {
-        setActivities(responseJSON);
-      })
-      .catch((error) => {
-        console.error("Error fetching activities:", error);
-      });
-
   }, [id, API]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEntry({ ...entry, [name]: value });
-  };
 
   const updateEntry = () => {
     fetch(`${API}/entries/${id}`, {
@@ -84,52 +82,140 @@ export default function EntryEdit() {
     updateEntry();
   };
 
-  return (
-    <div className="edit-entry-form">
-      <img className="edit-entry-form-profile" src="/profileImg.jpg" alt="profile-photo" />
-      <h2>Edit Entry</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="mood">Mood</label>
-        <select name="mood" value={entry.mood} onChange={handleInputChange}>
-          {/* Populate options with moods */}
-        </select>
+  const handleBack = () => {
+    navigate(`/entries/${id}`);
+  };
 
-        <label htmlFor="rating">Rating</label>
+  return (
+    <div className="edit-entry-container">
+      <div className="edit-entry-container-top-div">
+        <div className="edit-entry-profileImg">
+          <img
+            className="edit-entry-container-profile"
+            src="/profileImg.jpg"
+            alt="profile-photo"
+          />
+        </div>
+        <div className="edit-entry-container-topRight">
+        <div className="edit-entry-container-title">
+          <h1 className="font-face-gm text-white text-3xl">Edit Entry</h1>
+        </div>
+        <div className="edit-entry-logoImg">
+          <img
+            className="edit-entry-container-logo"
+            src="/vetLogo.png"
+            alt="profile-photo"
+            />
+            </div>
+        </div>
+      </div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="rating">Rating Before</label>
         <input
-          type="range"
+          type="number"
           name="rating"
           min="0"
           max="5"
-          value={entry.rating}
+          value={entry.rating_before}
           onChange={handleInputChange}
         />
 
-        <label htmlFor="text">Text edit Journal Entry</label>
-        <textarea name="text" value={entry.text} onChange={handleInputChange} />
-
-        <label htmlFor="serviceRelatedNotes">
-          Text service related notes (optional)
-        </label>
-        <textarea
-          name="serviceRelatedNotes"
-          value={entry.serviceRelatedNotes}
-          onChange={handleInputChange}
-        />
-
-        <label htmlFor="activityDone">Activities Done</label>
-        <select
-          name="activityDone"
-          value={entry.activityDone}
-          onChange={handleInputChange}
-        >
-          {/* Populate options with activities */}
+        <label htmlFor="mood">Current Mood</label>
+        <select name="mood" value={entry.mood} onChange={handleInputChange}>
+          {moods.map((mood, index) => (
+            <option key={index} value={mood}>
+              {mood}
+            </option>
+          ))}
         </select>
 
-        <div className="buttons">
-          <button type="submit">Update</button>
-          <button type="button" onClick={() => navigate(`/entries`)}>
-            Back
-          </button>
+        <label htmlFor="text">Journal Entry</label>
+        <textarea
+          id="description"
+          name="description"
+          value={entry.description}
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="is_service_related"> Service Related</label>
+        <input
+          type="checkbox"
+          id="is_service_related"
+          name="is_service_related"
+          checked={entry.is_service_related}
+          onChange={handleCheckboxChange}
+        />
+
+        {entry.is_service_related && (
+          <>
+            <label htmlFor="serviceRelatedNotes">
+              Service Related Notes (optional)
+            </label>
+            <textarea
+              name="serviceRelatedNotes"
+              value={entry.service_related_notes}
+              onChange={handleInputChange}
+            />
+          </>
+        )}
+
+        <label htmlFor="activityDone">Activity</label>
+        <select
+          name="activityDone"
+          value={entry.activity}
+          onChange={handleInputChange}
+        >
+          {activities.map((activity, index) => (
+            <option key={index} value={activity.title}>
+              {activity.title}
+            </option>
+          ))}
+        </select>
+
+        <label htmlFor="custom_activity">Custom Activity</label>
+        <input
+          type="text"
+          id="custom_activity"
+          name="custom_activity"
+          value={entry.custom_activity}
+          onChange={handleInputChange}
+        />
+
+        <label htmlFor="mood_after">Mood After</label>
+        <select
+          id="mood_after"
+          name="adjective_after"
+          value={entry.adjective_after}
+          onChange={handleInputChange}
+        >
+          {moods.map((mood, index) => (
+            <option key={index} value={mood}>
+              {mood}
+            </option>
+          ))}
+        </select>
+
+        <label htmlFor="rating_after">Rating After</label>
+        <input
+          type="number"
+          id="rating_after"
+          name="rating_after"
+          value={entry.rating_after}
+          onChange={handleInputChange}
+        />
+
+        <div className="edit-container-buttons">
+          <div className="bg-slate-50 text-lg hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full">
+            <button type="submit">cancel</button>
+          </div>
+          <div className="bg-slate-50 hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full">
+            <button type="submit">Edit</button>
+          </div>
+          <div className="bg-slate-50 hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full">
+            <button type="button" onClick={handleBack}>
+              back
+            </button>
+          </div>
         </div>
       </form>
     </div>
