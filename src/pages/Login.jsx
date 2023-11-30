@@ -53,7 +53,7 @@ export default function Login({ setShowNavbar }) {
         >
           <img
             className="login-container-img"
-            src="public/vetLogo.png"
+            src="/vetLogo.png"
             alt="logo"
           />
         </a>
