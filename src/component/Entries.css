@@ -23,7 +23,9 @@
 }
 
 .entries-profileImg {
-    width: 47%;
+    width: 27%;
+    border-radius: 10px;
+    padding-top: 30px;
 }
 
 .entries-logoImg {
@@ -46,4 +48,8 @@
 align-items: center;
 padding-top: 20px;
 font-size: 20px;
+}
+
+.profile-img {
+    border-radius: 5px;
 }

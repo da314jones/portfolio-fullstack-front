@@ -12,14 +12,16 @@ import Edit from "./pages/Edit";
 import Navbar from "./component/Navbar";
 
 function App() {
+const [showNavbar, setShowNavbar] = useState(true);
+
   return (
     <>
       <Router>
-        <Navbar />
+        { showNavbar && <Navbar /> }
         <Routes>
-          <Route exact path="/" element={<Welcome />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Welcome setShowNavbar={setShowNavbar}/>} />
+          <Route path="/register" element={<Registration setShowNavbar={setShowNavbar}/>} />
+          <Route path="/login" element={<Login setShowNavbar={setShowNavbar} />} />
           <Route path="/entries" element={<Home />} />
           <Route path="/entries/:id" element={<Show />} />
           <Route path="/entries/new" element={<New />} />

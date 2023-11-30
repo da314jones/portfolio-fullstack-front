@@ -48,6 +48,8 @@ select#mood_before {
   width: 100%; 
   /* max-width: 50%; */
   padding-bottom: 15px; 
+  border-radius: 5Px;
+padding-top: 30px;
 }
 
 .logoImg {
@@ -76,7 +78,7 @@ form {
   flex-direction: column;
 }
 
-input[name="rating_before"],
+.rating,
 input[name="date"]  {
   /* height: 97.5%;  */
   width: 155px;

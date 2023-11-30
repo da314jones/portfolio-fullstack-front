@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Registration() {
+export default function Registration({ setShowNavbar }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [serviceBranch, setServiceBranch] = useState("");
@@ -10,6 +10,10 @@ export default function Registration() {
   const [message, setMessage] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setShowNavbar(false);
+  }, [setShowNavbar]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

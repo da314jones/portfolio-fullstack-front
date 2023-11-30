@@ -1,3 +1,34 @@
-.soldado {
-    max-width: 500px;
+/* Base styles for the image */
+.soldado-image {
+  width: 100%; /* Adjust if necessary */
+  height: auto; /* Adjust if necessary */
+  transform: scale(1.3);
+  transform-origin: top;
+}
+
+/* Media query for screens larger than 767px */
+@media (min-width: 767px) {
+  .soldado-image {
+    position: absolute;
+    right: -50%; /* Moves the image 50% off the screen to the right */
+    top: 0; /* Adjust if needed to position vertically */
+    width: auto; /* Keep the original size of the image or adjust as needed */
+    height: 250%; /* Keep the original size or adjust as needed */
+  }
+}
+
+
+.hero-prompt {
+    /* max-width: 50px; */
+    padding-bottom: 770px;
+    margin-top: 20px;
+}
+
+.hero-text {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+a {
+    
 }

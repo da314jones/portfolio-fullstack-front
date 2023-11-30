@@ -19,6 +19,8 @@ p {
 .journal-container-title-logo {
     display: flex;
     justify-content: space-evenly;
+    width: 75%;
+
 }
 
 .journal-container-topRight {
@@ -32,6 +34,7 @@ p {
 .journal-container-profileImg {
     width: 29%;
     height: 29%;
+    border-radius: 5Px;
 }
 
 .journal-container-Img {
@@ -39,7 +42,6 @@ p {
 }
 
 .journal-container-title-logo {
-    width: 75%;
 }
 
 
@@ -59,3 +61,6 @@ p {
     padding-right: 20px;
 }
 
+.edit-input {
+    background-color: #ffffff;
+}

@@ -111,15 +111,12 @@ export default function EntryEdit() {
       </div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="rating">Rating Before</label>
-        <input
+        <input className="edit-input"
           type="number"
-          name="rating"
-          min="0"
-          max="5"
+          name="rating_before"
           value={entry.rating_before}
           onChange={handleInputChange}
         />
-
         <label htmlFor="mood">Current Mood</label>
         <select name="mood" value={entry.mood} onChange={handleInputChange}>
           {moods.map((mood, index) => (

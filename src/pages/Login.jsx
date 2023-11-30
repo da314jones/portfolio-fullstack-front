@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"
 
-export default function Login() {
+export default function Login({ setShowNavbar }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setShowNavbar(false);
+  }, [setShowNavbar]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
